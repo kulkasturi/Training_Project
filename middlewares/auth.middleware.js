@@ -8,3 +8,4 @@ export function authMiddleware(req, res, next) {
         res.status(401).json({ status: 'error', message: 'Unauthorized access' });
     }
 }
+
