@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>  
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+<body>
+    <h2>Users</h2>
+    <button onclick="getusers()">Fetch users</button>
+    
+    <div id="output">User data</div>
+
+    <div id="userdata"></div>
+
+    <script>
+        async function getusers(){
+            try{
+                const response = await fetch('http://localhost:8980/api/v1/user/getAllUsers');
+                const users = await response.json();
+
+                const rows = users.data.map(user => `<tr>
+                    <td>${user.pid}</td>
+                    <td>${user.p_name}</td>
+                    <td>${user.p_email}</td>
+                    <td>${user.p_gender}</td>
+                    
+                    <td><a href="http://localhost:8980/api/v1/user/deleteUser/${user.pid}">delete</a></td>
+                </tr>`).join('');
+
+                console.log(rows);
+
+                output.innerHTML =`
+                <table>
+                    <thead>
+                        <td>Id</td?
+                        <td>Name</td>
+                        <td>Email</td>  
+                        <td>Gender</td>
+                        
+                    </thead>
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+                `;
+            }
+            catch(err){
+                console.error('Error fetching users:', err);
+                output.innerHTML = `<p>Error fetching users: ${err.message}</p>`;
+            }
+        }
+        <!-- getusers(); -->
+    </script>
+</body>
+</html>

@@ -69,5 +69,21 @@ export const updateUser = async (req, res) => {
 }
 
 
+export const deleteUser = async (req, res) => {
+    try {
+        const pid = req.params.pid;
+        const query = 'DELETE FROM person1 WHERE pid = ?';
+        const [result] = await db.execute(query, [pid]);
+        if (result.affectedRows > 0) {
+            res.status(200).json({ status: 'success', message: 'User deleted successfully' });
+        } else {
+            res.status(404).json({ status: 'error', message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({ status: 'error', message: 'Error deleting user', error: error.message });
+    }
+}
+
 
 

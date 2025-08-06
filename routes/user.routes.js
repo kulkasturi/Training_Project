@@ -1,6 +1,6 @@
 import express from 'express';
 const userRouter = express.Router();
-import { getAllUsers, updateUser } from '../controllers/user.controller.js';
+import { getAllUsers, updateUser, deleteUser } from '../controllers/user.controller.js';
 
 
 userRouter.get('/profile', (req, res) => {
@@ -15,4 +15,12 @@ userRouter.get('/settings', (req, res) => {
 userRouter.get('/getAllUsers', getAllUsers);
 
 userRouter.get('/updateUser/:pid', updateUser);
+
+
+// http://localhost:8980/api/v1/user/deleteUser/:pid
+userRouter.get('/deleteUser/:pid',deleteUser);
+
+
 export default userRouter;
+
+
