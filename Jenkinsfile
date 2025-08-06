@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage('Checkout') {
             steps{
-                git 'https://github.com/kulkasturi/Training_Project.git'
+                git  branch: 'main' , https://github.com/kulkasturi/Training_Project.git'
             }
         }
         stage('Build') {
